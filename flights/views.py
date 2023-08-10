@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 # Create your views here.
 from django.shortcuts import render
-from .models import Flight, Airport,Passenger
+from .models import Flight,Passenger
 
 # Create your views here.
 
@@ -17,7 +20,8 @@ def flight(request, flight_id):
     non_passengers = Passenger.objects.exclude(flights=flight).all()
     return render(request, "flights/flight.html", {
         "flight": flight,
-        "passengers" : passengers
+        "passengers" : passengers,
+        "non_passengers" : non_passengers
     })
 
 def book(request, flight_id):
